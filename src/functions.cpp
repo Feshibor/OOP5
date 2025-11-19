@@ -2,9 +2,7 @@
 #include <iostream>
 #include <cstring>
 
-// ======================
-// ReuseMemoryResource
-// ======================
+
 void* ReuseMemoryResource::do_allocate(size_t bytes, size_t alignment) {
     for (auto it = freeBlocks.begin(); it != freeBlocks.end(); ++it) {
         if (allocatedBlocks[*it] >= bytes) {
@@ -32,9 +30,6 @@ ReuseMemoryResource::~ReuseMemoryResource() {
     freeBlocks.clear();
 }
 
-// ======================
-// MyContainer
-// ======================
 template<typename T>
 MyContainer<T>::MyContainer(std::pmr::memory_resource* mr)
     : alloc(mr), data(nullptr), sz(0), capacity(0) {}
@@ -66,7 +61,6 @@ void MyContainer<T>::push_back(const T& value) {
     ++sz;
 }
 
-// Explicit instantiation for common types
 template class MyContainer<int>;
 struct TestStruct { int a; double b; };
 template class MyContainer<TestStruct>;
