@@ -5,9 +5,6 @@
 #include <iterator>
 #include <algorithm>
 
-// ======================
-// Custom Memory Resource
-// ======================
 class ReuseMemoryResource : public std::pmr::memory_resource {
 private:
     std::map<void*, size_t> allocatedBlocks;
@@ -24,9 +21,6 @@ public:
     ~ReuseMemoryResource();
 };
 
-// ======================
-// Custom Container
-// ======================
 template<typename T>
 class MyContainer {
 public:
@@ -46,7 +40,7 @@ public:
     void push_back(const T& value);
     size_t size() const { return sz; }
 
-    // Iterator
+
     class iterator {
         T* ptr;
     public:
